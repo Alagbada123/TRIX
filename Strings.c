@@ -8,14 +8,14 @@
  */
 int _strlen(char *s)
 {
-	int i = 0;
+	int k = 0;
 
 	if (!s)
 		return (0);
 
 	while (*s++)
-		i++;
-	return (i);
+		k++;
+	return (k);
 }
 
 /**
