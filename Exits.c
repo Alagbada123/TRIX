@@ -9,25 +9,25 @@
  */
 char *_strncpy(char *dest, char *src, int n)
 {
-	int i, j;
-	char *s = dest;
+	int k, l;
+	char *c = dest;
 
-	i = 0;
-	while (src[i] != '\0' && i < n - 1)
+	k = 0;
+	while (src[k] != '\0' && k < n - 1)
 	{
-		dest[i] = src[i];
-		i++;
+		dest[k] = src[k];
+		k++;
 	}
-	if (i < n)
+	if (k < n)
 	{
-		j = i;
-		while (j < n)
+		l = k;
+		while (l < n)
 		{
-			dest[j] = '\0';
-			j++;
+			dest[l] = '\0';
+			l++;
 		}
 	}
-	return (s);
+	return (c);
 }
 
 /**
@@ -39,29 +39,29 @@ char *_strncpy(char *dest, char *src, int n)
  */
 char *_strncat(char *dest, char *src, int n)
 {
-	int i, j;
-	char *s = dest;
+	int k, l;
+	char *c = dest;
 
-	i = 0;
-	j = 0;
-	while (dest[i] != '\0')
-		i++;
-	while (src[j] != '\0' && j < n)
+	k = 0;
+	l = 0;
+	while (dest[k] != '\0')
+		k++;
+	while (src[l] != '\0' && l < n)
 	{
-		dest[i] = src[j];
-		i++;
-		j++;
+		dest[k] = src[l];
+		k++;
+		l++;
 	}
-	if (j < n)
-		dest[i] = '\0';
-	return (s);
+	if (l < n)
+		dest[k] = '\0';
+	return (c);
 }
 
 /**
  **_strchr - locates a character in a string
  *@s: the string to be parsed
  *@c: the character to look for
- *Return: (s) a pointer to the memory area s
+ *Return: (c) a pointer to the memory area c
  */
 char *_strchr(char *s, char c)
 {
