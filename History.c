@@ -32,24 +32,24 @@ char *get_history_file(info_t *info)
  */
 int write_history(info_t *info)
 {
-	ssize_t fd;
+	ssize_t ab;
 	char *filename = get_history_file(info);
 	list_t *node = NULL;
 
 	if (!filename)
 		return (-1);
 
-	fd = open(filename, O_CREAT | O_TRUNC | O_RDWR, 0644);
+	ab = open(filename, O_CREAT | O_TRUNC | O_RDWR, 0644);
 	free(filename);
-	if (fd == -1)
+	if (ab == -1)
 		return (-1);
 	for (node = info->history; node; node = node->next)
 	{
-		_putsfd(node->str, fd);
-		_putfd('\n', fd);
+		_putsab(node->str, ab);
+		_putab('\n', ab);
 	}
-	_putfd(BUF_FLUSH, fd);
-	close(fd);
+	_putab(BUF_FLUSH, ab);
+	close(ab);
 	return (1);
 }
 
@@ -61,19 +61,19 @@ int write_history(info_t *info)
  */
 int read_history(info_t *info)
 {
-	int i, last = 0, linecount = 0;
-	ssize_t fd, rdlen, fsize = 0;
+	int k, last = 0, linecount = 0;
+	ssize_t ab, rdlen, fsize = 0;
 	struct stat st;
 	char *buf = NULL, *filename = get_history_file(info);
 
 	if (!filename)
 		return (0);
 
-	fd = open(filename, O_RDONLY);
+	ab = open(filename, O_RDONLY);
 	free(filename);
-	if (fd == -1)
+	if (ab == -1)
 		return (0);
-	if (!fstat(fd, &st))
+	if (!fstat(ab, &st))
 		fsize = st.st_size;
 	if (fsize < 2)
 		return (0);
@@ -84,15 +84,15 @@ int read_history(info_t *info)
 	buf[fsize] = 0;
 	if (rdlen <= 0)
 		return (free(buf), 0);
-	close(fd);
-	for (i = 0; i < fsize; i++)
-		if (buf[i] == '\n')
+	close(ab);
+	for (k = 0; k < fsize; k++)
+		if (buf[k] == '\n')
 		{
-			buf[i] = 0;
+			buf[k] = 0;
 			build_history_list(info, buf + last, linecount++);
-			last = i + 1;
+			last = k + 1;
 		}
-	if (last != i)
+	if (last != k)
 		build_history_list(info, buf + last, linecount++);
 	free(buf);
 	info->histcount = linecount;
@@ -132,12 +132,12 @@ int build_history_list(info_t *info, char *buf, int linecount)
 int renumber_history(info_t *info)
 {
 	list_t *node = info->history;
-	int i = 0;
+	int k = 0;
 
 	while (node)
 	{
-		node->num = i++;
+		node->num = k++;
 		node = node->next;
 	}
-	return (info->histcount = i);
+	return (info->histcount = k);
 }
