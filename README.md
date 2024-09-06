@@ -1,19 +1,5 @@
 0x16. C - Simple Shell
-C
-Group project
-Syscall
- Weight: 10
- Project to be done in teams of 2 people (your team: Rhoda Ogungbemi, Abiodun Alagbada)
- Project over - took place from Aug 14, 2024 7:00 AM to Aug 29, 2024 7:00 AM
- An auto review will be launched at the deadline
-In a nutshell…
-Contribution: 100.0%
-Auto QA review: 5.0/55 mandatory & 0.0/76 optional
-Altogether:  9.09%
-Mandatory: 9.09%
-Optional: 0.0%
-Contribution: 100.0%
-Calculation:  100.0% * (9.09% + (9.09% * 0.0%) )  == 9.09%
+
 Concepts
 For this project, we expect you to look at these concepts:
 
