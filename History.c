@@ -32,24 +32,24 @@ char *get_history_file(info_t *info)
  */
 int write_history(info_t *info)
 {
-	ssize_t ab;
+	ssize_t fd;
 	char *filename = get_history_file(info);
 	list_t *node = NULL;
 
 	if (!filename)
 		return (-1);
 
-	ab = open(filename, O_CREAT | O_TRUNC | O_RDWR, 0644);
+	fd = open(filename, O_CREAT | O_TRUNC | O_RDWR, 0644);
 	free(filename);
-	if (ab == -1)
+	if (fd == -1)
 		return (-1);
 	for (node = info->history; node; node = node->next)
 	{
-		_putsab(node->str, ab);
-		_putab('\n', ab);
+		_putsfd(node->str, fd);
+		_putfd('\n', fd);
 	}
-	_putab(BUF_FLUSH, ab);
-	close(ab);
+	_putfd(BUF_FLUSH, fd);
+	close(fd);
 	return (1);
 }
 
@@ -80,7 +80,7 @@ int read_history(info_t *info)
 	buf = malloc(sizeof(char) * (fsize + 1));
 	if (!buf)
 		return (0);
-	rdlen = read(fd, buf, fsize);
+	rdlen = read(ab, buf, fsize);
 	buf[fsize] = 0;
 	if (rdlen <= 0)
 		return (free(buf), 0);

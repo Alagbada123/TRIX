@@ -18,8 +18,8 @@ ssize_t input_buf(info_t *info, char **buf, size_t *len)
 		free(*buf);
 		*buf = NULL;
 		signal(SIGINT, sigintHandler);
-		x = getline(buf, &len_p, stdin);
-		x = _getline(info, buf, &len_p);
+		x = getline(buf, &len_a, stdin);
+		x = _getline(info, buf, &len_a);
 		if (x > 0)
 		{
 			if ((*buf)[x - 1] == '\n')
@@ -60,7 +60,7 @@ ssize_t get_input(info_t *info)
 	if (len)
 	{
 		l = k;
-		p = buf + k;
+		a = buf + k;
 
 		check_chain(info, buf, &l, k, len);
 		while (l < len)
